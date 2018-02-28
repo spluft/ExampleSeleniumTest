@@ -2,6 +2,7 @@ package com.spluft.tinkoff;
 
 import com.spluft.tinkoff.pages.MainPage;
 import com.spluft.tinkoff.pages.PaymentPage;
+import com.spluft.tinkoff.pages.UtilityPaymentsPage;
 import com.spluft.tinkoff.utils.ReaderProperties;
 import com.spluft.tinkoff.utils.WebDriverFactory;
 import org.openqa.selenium.WebDriver;
@@ -28,6 +29,7 @@ public class BaseTest {
 
         final MainPage mainPage = new MainPage(driver);
         final PaymentPage paymentPage = mainPage.getPaymentPage();
+        final UtilityPaymentsPage utilityPaymentsPage = paymentPage.getUtilityPaymentsPage();
     }
 
     @AfterMethod
