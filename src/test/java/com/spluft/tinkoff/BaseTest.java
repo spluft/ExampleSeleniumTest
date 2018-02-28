@@ -10,9 +10,12 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertEquals;
+
 public class BaseTest {
-    private final static String PAYMENT_RECIPIENT = "ЖКУ-Москва";
-    private final static String BASE_URL = ReaderProperties.getBaseUrl();
+    private final String BASE_URL = ReaderProperties.getBaseUrl();
+    private final String REGION = ReaderProperties.getRegion();
+    private final String HCS_MOSCOW = "ЖКУ-Москва";
 
     private WebDriver driver;
 
@@ -30,6 +33,10 @@ public class BaseTest {
         final MainPage mainPage = new MainPage(driver);
         final PaymentPage paymentPage = mainPage.getPaymentPage();
         final UtilityPaymentsPage utilityPaymentsPage = paymentPage.getUtilityPaymentsPage();
+
+        utilityPaymentsPage.setRegion(REGION);
+
+        assertEquals(utilityPaymentsPage.getHcsRecipient(), HCS_MOSCOW);
     }
 
     @AfterMethod

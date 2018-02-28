@@ -37,4 +37,8 @@ public class ReaderProperties {
     public static String getBrowser() {
         return properties.getProperty("browser");
     }
+
+    public static String getRegion() {
+        return properties.getProperty("region");
+    }
 }
