@@ -1,10 +1,15 @@
-package com.spluft.tinkoff.utils;
+package com.spluft.tinkoff.pages;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class Helper {
+public class CommonPage {
+    //@FindBy(css = "#mainMenu *[data-qa-file='MenuItem'] *[href='/payments/']")
+    @FindBy(xpath = "//*[@id=\"mainMenu\"]/li[3]/span/a")
+    private WebElement paymentsBtn;
+
     protected WebDriver driver;
 
     private boolean isElementEnabled(WebElement webElement) {
@@ -34,5 +39,10 @@ public class Helper {
             return false;
         }
         return false;
+    }
+
+    public PaymentPage getPaymentPage() {
+        clickElement(paymentsBtn);
+        return new PaymentPage(driver);
     }
 }

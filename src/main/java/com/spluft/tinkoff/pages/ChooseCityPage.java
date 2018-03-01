@@ -1,6 +1,5 @@
 package com.spluft.tinkoff.pages;
 
-import com.spluft.tinkoff.utils.Helper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,9 +8,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class ChooseCityPage extends Helper {
+public class ChooseCityPage extends CommonPage {
     //TODO: replace hardcode city
-    private final String choosingCitySelector = "//*[text()='г. Москва']/..";
+    private String choosingCitySelector = "//*[text()='%s']/..";
     @FindBy(css = ".ui-link.ui-menu__link.ui-menu__link_logo .ui-link__text")
     private List<WebElement> listOfHousings;
     @FindBy(css = "*[role='button']")
@@ -27,7 +26,8 @@ public class ChooseCityPage extends Helper {
     }
 
     public void setCity(){
-        city = driver.findElement(By.xpath(choosingCitySelector));
+        String str = String.format(choosingCitySelector, region);
+        city = driver.findElement(By.xpath(String.format(choosingCitySelector, region)));
         city.click();
     }
 

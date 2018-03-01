@@ -1,12 +1,11 @@
 package com.spluft.tinkoff.pages;
 
-import com.spluft.tinkoff.utils.Helper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class UtilityPaymentsPage extends Helper {
+public class UtilityPaymentsPage extends CommonPage {
     private final String PAYMENT_RECIPIENT = "ЖКУ-Москва";
 
     @FindBy(css = "*[role='button']")

@@ -9,11 +9,12 @@ import com.spluft.tinkoff.utils.WebDriverFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 public class BaseTest {
     private final String BASE_URL = ReaderProperties.getBaseUrl();
-    private final String REGION = ReaderProperties.getRegion();
+    private final String REGION = "г. Москва";
+    private final String REGION_ST_PETERSBURG = "г. Санкт-Петербург";
     private final String HCS_MOSCOW = "ЖКУ-Москва";
 
     private final static String WRONG_FIELD_CODE = "Поле неправильно заполнено";
@@ -69,6 +70,24 @@ public class BaseTest {
         final HcsMoscowPage hcsMoscowPage = new HcsMoscowPage(driver);
         final String message = hcsMoscowPage.getInputErrorSumCode(data);
         assertEquals(message, errorMessage);
+    }
+
+    @Test
+    public void test05SearchHCS() {
+        final HcsMoscowPage hcsMoscowPage = new HcsMoscowPage(driver);
+        final PaymentPage paymentPage = hcsMoscowPage.getPaymentPage();
+        paymentPage.hcsSearch(HCS_MOSCOW);
+        assertTrue(hcsMoscowPage.isPayHCSMoscowTabEnabled());
+    }
+
+    @Test
+    public void test06ChangeCity() {
+        final HcsMoscowPage hcsMoscowPage = new HcsMoscowPage(driver);
+        final PaymentPage paymentPage = hcsMoscowPage.getPaymentPage();
+        final UtilityPaymentsPage utilityPaymentsPage = paymentPage.getUtilityPaymentsPage();
+        utilityPaymentsPage.setRegion(REGION_ST_PETERSBURG);
+
+        assertFalse(paymentPage.isHCSPresent(HCS_MOSCOW));
     }
 
     @AfterClass

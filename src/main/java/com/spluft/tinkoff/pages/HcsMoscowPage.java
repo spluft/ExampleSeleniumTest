@@ -1,12 +1,11 @@
 package com.spluft.tinkoff.pages;
 
-import com.spluft.tinkoff.utils.Helper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class HcsMoscowPage extends Helper {
+public class HcsMoscowPage extends CommonPage {
     @FindBy(xpath = "//*[text()='Оплатить ЖКУ в Москве']")
     private WebElement payHCSmoscowTab;
     @FindBy(name = "provider-payerCode")
@@ -31,7 +30,13 @@ public class HcsMoscowPage extends Helper {
     }
 
     public void clickPayHCSMoscowTab() {
-        payHCSmoscowTab.click();
+        if (isPayHCSMoscowTabEnabled()) {
+            payHCSmoscowTab.click();
+        }
+    }
+
+    public boolean isPayHCSMoscowTabEnabled() {
+        return isPresent(payHCSmoscowTab) && payHCSmoscowTab.isEnabled();
     }
 
     public String getInputErrorPayerCode(String code){
