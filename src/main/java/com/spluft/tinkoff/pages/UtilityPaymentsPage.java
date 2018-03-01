@@ -30,4 +30,9 @@ public class UtilityPaymentsPage extends Helper {
         isPresent(firstHcsRecipient);
         return firstHcsRecipient.getText();
     }
+
+    public HcsMoscowPage getHcsMoscowPage() {
+        clickElement(firstHcsRecipient);
+        return new HcsMoscowPage(driver);
+    }
 }
